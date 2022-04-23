@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                com.cs151.team2.passwordmanager/com.cs151.team2.passwordmanager.Application
+                                com.cs151.team2.passwordmanager/com.cs151.team2.application.Main
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

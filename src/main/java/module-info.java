@@ -3,6 +3,8 @@ module com.cs151.team2.passwordmanager {
     requires javafx.fxml;
 
 
-    opens com.cs151.team2.passwordmanager to javafx.fxml;
-    exports com.cs151.team2.passwordmanager;
+    opens com.cs151.team2.application to javafx.fxml;
+    exports com.cs151.team2.application;
+    exports controller;
+    opens controller to javafx.fxml;
 }
