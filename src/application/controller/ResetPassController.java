@@ -7,6 +7,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
+import java.sql.SQLException;
+
 public class ResetPassController {
     @FXML
     private TextField emailField;
@@ -23,8 +25,7 @@ public class ResetPassController {
     @FXML
     private Button confirmBtn;
 
-    public void connect() {
-        DBConnection dbConnection = new DBConnection();
-        dbConnection.connect();
+    public void connect() throws SQLException {
+        DBConnection dbConnection = DBConnection.getInstance();
     }
 }
