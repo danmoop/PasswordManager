@@ -10,7 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Pane root = (Pane) FXMLLoader.load(getClass().getResource("views/Sample.fxml"));
+            Pane root = (Pane) FXMLLoader.load(getClass().getResource("views/signUpView.fxml"));
             Scene scene = new Scene(root, 900, 600);
             primaryStage.setScene(scene);
             primaryStage.show();
