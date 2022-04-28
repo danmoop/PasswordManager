@@ -1,5 +1,6 @@
 package application.controller;
 
+import application.tools.DBConnection;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -22,4 +23,8 @@ public class ResetPassController {
     @FXML
     private Button confirmBtn;
 
+    public void connect() {
+        DBConnection dbConnection = new DBConnection();
+        dbConnection.connect();
+    }
 }
