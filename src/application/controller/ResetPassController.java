@@ -58,4 +58,8 @@ public class ResetPassController {
             SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
         }
     }
+
+    public void goBack(ActionEvent event) {
+        SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
+    }
 }

@@ -40,7 +40,16 @@ public class SetPassSettingsController {
         user.setPasswordSettings(passwordSettings);
         databaseManager.set(user.getEmail(), user);
 
-        SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
-        SceneManager.showAlert("Registered successfully");
+        if (areSettingsCorrect(minPassLength, maxPassLength, numOfUpperChars)) {
+            SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
+            SceneManager.showAlert("Registered successfully");
+        } else {
+            SceneManager.showAlert("Incorrect settings!");
+        }
+    }
+
+    private boolean areSettingsCorrect(int minPassLength, int maxPassLength, int numOfUpperChars) {
+        if (minPassLength > maxPassLength) return false;
+        return numOfUpperChars <= maxPassLength && numOfUpperChars >= minPassLength;
     }
 }

@@ -27,6 +27,7 @@ public class Main extends Application {
             Pane root = (Pane) FXMLLoader.load(getClass().getResource("views/signUpView.fxml"));
             Scene scene = new Scene(root, 900, 600);
             primaryStage.setScene(scene);
+            primaryStage.setResizable(false);
             primaryStage.show();
         } catch (Exception e) {
             e.printStackTrace();

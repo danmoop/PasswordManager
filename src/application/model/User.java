@@ -1,6 +1,7 @@
 package application.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Serializable {
@@ -17,6 +18,7 @@ public class User implements Serializable {
         this.securityQuestion = securityQuestion;
         this.securityAnswer = securityAnswer;
         this.passwordSettings = passwordSettings;
+        this.websites = new ArrayList<>();
     }
 
     public String getEmail() {

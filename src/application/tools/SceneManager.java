@@ -40,4 +40,11 @@ public class SceneManager {
         alert.setContentText(message);
         alert.show();
     }
+
+    public static void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.show();
+    }
 }

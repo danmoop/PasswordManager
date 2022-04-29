@@ -12,13 +12,13 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/8.0.241" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.ResetPassController">
     <children>
-        <Text layoutX="24.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset Password">
+        <Text layoutX="168.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reset Password">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
         </Text>
         <Line endX="318.29296875" layoutX="125.0" layoutY="79.0" startX="-100.0" stroke="#d5d1d1" />
-        <Button fx:id="confirmBtn" layoutX="368.0" layoutY="395.0" mnemonicParsing="false" onAction="#setPass" style="-fx-background-color: #0069D9;" text="Confirm" textFill="WHITE">
+        <Button fx:id="confirmBtn" layoutX="368.0" layoutY="395.0" mnemonicParsing="false" onAction="#setPass" style="-fx-background-color: #5757e4;" text="Confirm" textFill="WHITE">
             <font>
                 <Font name="System Bold" size="15.0" />
             </font>
@@ -29,7 +29,7 @@
                 <HBox prefHeight="100.0" prefWidth="200.0">
                     <children>
                         <TextField fx:id="emailField" prefHeight="36.0" prefWidth="342.0" promptText="johndoe123@gmail.com" />
-                        <Button fx:id="confirmEmailBtn" mnemonicParsing="false" onAction="#checkEmail" style="-fx-background-color: #0069D9;" text="Confirm" textFill="WHITE">
+                        <Button fx:id="confirmEmailBtn" mnemonicParsing="false" onAction="#checkEmail" style="-fx-background-color: #5757e4;" text="Confirm" textFill="WHITE">
                             <font>
                                 <Font name="System Bold" size="15.0" />
                             </font>
@@ -51,5 +51,10 @@
                 <PasswordField fx:id="newPassField" disable="true" promptText="*********" />
             </children>
         </VBox>
+      <Button layoutX="25.0" layoutY="35.0" mnemonicParsing="false" onAction="#goBack" style="-fx-background-color: transparent;" text="Go Back" textFill="#5757e4">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Button>
     </children>
 </Pane>
