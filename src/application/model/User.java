@@ -68,16 +68,4 @@ public class User implements Serializable {
     public void setPasswordSettings(PasswordSettings passwordSettings) {
         this.passwordSettings = passwordSettings;
     }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "email='" + email + '\'' +
-                ", password=" + password +
-                ", websites=" + websites +
-                ", securityQuestion='" + securityQuestion + '\'' +
-                ", securityAnswer='" + securityAnswer + '\'' +
-                ", passwordSettings=" + passwordSettings +
-                '}';
-    }
 }

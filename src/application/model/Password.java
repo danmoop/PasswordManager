@@ -26,12 +26,4 @@ public class Password implements Serializable {
     public void setExpirationDate(long expirationDate) {
         this.expirationDate = expirationDate;
     }
-
-    @Override
-    public String toString() {
-        return "Password{" +
-                "password='" + password + '\'' +
-                ", expirationDate=" + expirationDate +
-                '}';
-    }
 }

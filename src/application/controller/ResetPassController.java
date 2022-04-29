@@ -28,6 +28,11 @@ public class ResetPassController {
 
     private final long ONE_MONTH = 31L * 86400 * 1000;
 
+    /**
+     * This function confirms the existence of an email specified by the user
+     * If the email and the account exist, user will be able to provide information to change the password
+     * If the email and the account don't exist, show an alert
+     */
     public void checkEmail() throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
 
@@ -43,6 +48,12 @@ public class ResetPassController {
         }
     }
 
+    /**
+     * This function sets a new password after all the checks have been completed before
+     * After information has been saved, the user is redirected to a login view
+     *
+     * @param event is used to identify which view should be replaced with a new one
+     */
     public void setPass(ActionEvent event) throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
         User user = databaseManager.findByEmail(emailField.getText());
@@ -59,6 +70,7 @@ public class ResetPassController {
         }
     }
 
+    // If user doesn't want to reset a pass, redirect back to a login view
     public void goBack(ActionEvent event) {
         SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
     }

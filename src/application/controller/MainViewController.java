@@ -25,6 +25,7 @@ public class MainViewController implements Initializable {
     @FXML
     private ScrollPane scrollPane;
 
+    // An Initializable is implemented to perform an operation after the view has been loaded
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -34,11 +35,16 @@ public class MainViewController implements Initializable {
         }
     }
 
+    /**
+     * This function displays all the websites added by a user on the main view
+     * After the active authentication has been fetched, get all the user's websites
+     * Check for expired passwords and notify if there are any by showing an alert
+     * Display each stored account in a vbox on a scroll pane
+     */
     private void displayWebsites() throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
         User user = databaseManager.getActiveUser();
         checkForExpiredPasswords(user);
-        System.out.println(user.getWebsites());
         List<Website> websites = user.getWebsites();
 
         VBox vBox = new VBox();
@@ -72,16 +78,31 @@ public class MainViewController implements Initializable {
         }
     }
 
+    /**
+     * This function sets the active authentication to null and redirects the user to login view
+     *
+     * @param event is used to identify which view should be replaced with a new one
+     */
     public void logout(ActionEvent event) throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
         databaseManager.setActiveUser(null);
         SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
     }
 
+    /**
+     * This function redirects the user to a page that allows to add an account for an app/website
+     *
+     * @param event is used to identify which view should be replaced with a new one
+     */
     public void addWebsite(ActionEvent event) {
         SceneManager.switchToView(event, "views/addWebsitesView.fxml", 600, 400);
     }
 
+    /**
+     * This function checks whether there are any expired passwords
+     *
+     * @param user is a user, whose passwords are going to be checked
+     */
     private void checkForExpiredPasswords(User user) {
         StringBuilder sb = new StringBuilder();
 

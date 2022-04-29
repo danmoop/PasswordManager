@@ -36,13 +36,4 @@ public class Website implements Serializable {
     public void setPassword(Password password) {
         this.password = password;
     }
-
-    @Override
-    public String toString() {
-        return "Website{" +
-                "username='" + username + '\'' +
-                ", websiteName='" + websiteName + '\'' +
-                ", password=" + password +
-                '}';
-    }
 }

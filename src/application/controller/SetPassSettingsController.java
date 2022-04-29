@@ -28,6 +28,13 @@ public class SetPassSettingsController {
     @FXML
     private TextField upperCharsNumField;
 
+    /**
+     * This function finishes the registration by asking the settings for generating a password
+     * After fetching the values, check whether they are correct and set the settings for the user
+     * Save the user and redirect to a login view to let them sign in
+     *
+     * @param event is used to identify which view should be replaced with a new one
+     */
     public void confirmSettings(ActionEvent event) throws IOException {
         int minPassLength = Integer.parseInt(minPassLengthField.getText());
         int maxPassLength = Integer.parseInt(maxPassLengthField.getText());
@@ -48,6 +55,9 @@ public class SetPassSettingsController {
         }
     }
 
+    /**
+     * @return whether the values are correct and are in a valid range
+     */
     private boolean areSettingsCorrect(int minPassLength, int maxPassLength, int numOfUpperChars) {
         if (minPassLength > maxPassLength) return false;
         return numOfUpperChars <= maxPassLength && numOfUpperChars >= minPassLength;
