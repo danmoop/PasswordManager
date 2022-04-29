@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-      prefWidth="900.0" style="-fx-background-color: #F8FAFD;" xmlns="http://javafx.com/javafx/8.0.241"
+      prefWidth="900.0" style="-fx-background-color: #F8FAFD;" xmlns="http://javafx.com/javafx/8.0.202"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SignUpViewController">
     <children>
         <Text fill="#707070" layoutX="102.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0"

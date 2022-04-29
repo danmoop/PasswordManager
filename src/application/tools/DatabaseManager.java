@@ -12,6 +12,8 @@ public class DatabaseManager {
     private static String path;
     private List<User> users;
 
+    private static User activeUser;
+
     private DatabaseManager(String path) throws IOException {
         DatabaseManager.path = path;
         this.users = new ArrayList<>();
@@ -27,6 +29,39 @@ public class DatabaseManager {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public void add(User user) {
+        users.add(user);
+        save();
+    }
+
+    public User findByEmail(String email) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getEmail().equals(email)) {
+                return users.get(i);
+            }
+        }
+
+        return null;
+    }
+
+    public static void setActiveUser(User activeUser) {
+        DatabaseManager.activeUser = activeUser;
+    }
+
+    public static User getActiveUser() {
+        return activeUser;
+    }
+
+    public void set(String email, User user) {
+        for (int i = 0; i < users.size(); i++) {
+            if (users.get(i).getEmail().equals(email)) {
+                users.set(i, user);
+            }
+        }
+
+        save();
     }
 
     public void init() throws IOException {
@@ -62,10 +97,5 @@ public class DatabaseManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void add(User user) {
-        users.add(user);
-        save();
     }
 }

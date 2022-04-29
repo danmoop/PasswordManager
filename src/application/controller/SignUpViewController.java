@@ -1,19 +1,17 @@
 package application.controller;
 
 import application.model.Password;
-import application.model.PasswordSettings;
 import application.model.User;
-import application.tools.DBConnection;
+import application.tools.DatabaseManager;
 import application.tools.SceneManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import org.sqlite.core.DB;
 
+import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.Date;
 
 public class SignUpViewController {
 
@@ -29,15 +27,28 @@ public class SignUpViewController {
     @FXML
     private PasswordField passField;
 
-    @FXML
-    private Button signupBtn;
+    private final long ONE_MONTH = 31L * 86400 * 1000;
 
     public void openLoginPage(ActionEvent event) {
         SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
     }
 
-    public void register() throws SQLException {
-        System.out.println("Email: " + emailField.getText());
-        DBConnection connection = DBConnection.getInstance();
+    public void register(ActionEvent event) throws SQLException, IOException {
+        String email = emailField.getText();
+        String question = questionField.getText();
+        String answer = answerField.getText();
+        String pass = passField.getText();
+
+        DatabaseManager databaseManager = DatabaseManager.getInstance();
+
+        if (databaseManager.findByEmail(email) == null) {
+            long date = new Date().getTime();
+            User user = new User(email, new Password(pass, ONE_MONTH * 3), question, answer, null);
+            databaseManager.add(user);
+
+            SceneManager.switchToView(event, "views/setPassSettings.fxml", 900, 600);
+        } else {
+            SceneManager.showAlert("This email is already registered");
+        }
     }
 }

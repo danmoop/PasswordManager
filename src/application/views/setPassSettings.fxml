@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
+      prefWidth="900.0" style="-fx-background-color: #F8FAFD;" xmlns="http://javafx.com/javafx/8.0.202"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SetPassSettingsController">
+    <children>
+        <Text fill="#707070" layoutX="149.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
+              text="Set Password Generator Settings" wrappingWidth="601.5501403808594">
+            <font>
+                <Font name="System Bold" size="39.0"/>
+            </font>
+        </Text>
+        <VBox alignment="CENTER" layoutX="149.0" layoutY="107.0" prefHeight="116.0" prefWidth="602.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="56.0" prefWidth="598.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum Password Length"/>
+                        <TextField fx:id="minPassLengthField"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="56.0" prefWidth="598.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Maximum Password Length"/>
+                        <TextField fx:id="maxPassLengthField"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <VBox alignment="CENTER" layoutX="255.0" layoutY="236.0" prefHeight="150.0" prefWidth="391.0" spacing="15.0">
+            <children>
+                <CheckBox fx:id="useSpecChars" alignment="CENTER" contentDisplay="CENTER" ellipsisString=""
+                          mnemonicParsing="false" text="Use Special Characters" textAlignment="JUSTIFY"/>
+                <CheckBox fx:id="useUpperLetters" alignment="CENTER" contentDisplay="CENTER" ellipsisString=""
+                          mnemonicParsing="false" text="Use Uppercase Letters" textAlignment="JUSTIFY"/>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="# of Uppercase Letters"/>
+                        <TextField fx:id="upperCharsNumField" prefHeight="31.0" prefWidth="53.0"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <Button fx:id="confirmSettingsBtn" layoutX="389.0" layoutY="512.0" mnemonicParsing="false"
+                onAction="#confirmSettings" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #0069D9;"
+                text="Save" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0"/>
+            </font>
+        </Button>
+    </children>
+</Pane>

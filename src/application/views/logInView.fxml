@@ -51,8 +51,9 @@
                         </Button>
                     </children>
                 </HBox>
-                <Button fx:id="loginBtn" layoutX="119.0" layoutY="406.0" mnemonicParsing="false" prefHeight="31.0"
-                        prefWidth="109.0" style="-fx-background-color: #0069D9;" text="Log In" textFill="WHITE">
+                <Button fx:id="loginBtn" layoutX="119.0" layoutY="406.0" mnemonicParsing="false" onAction="#login"
+                        prefHeight="31.0" prefWidth="109.0" style="-fx-background-color: #0069D9;" text="Log In"
+                        textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="16.0"/>
                     </font>
