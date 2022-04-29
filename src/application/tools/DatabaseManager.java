@@ -12,7 +12,7 @@ public class DatabaseManager {
     private static String path;
     private List<User> users;
 
-    private static User activeUser;
+    private User activeUser;
 
     private DatabaseManager(String path) throws IOException {
         DatabaseManager.path = path;
@@ -46,11 +46,11 @@ public class DatabaseManager {
         return null;
     }
 
-    public static void setActiveUser(User activeUser) {
-        DatabaseManager.activeUser = activeUser;
+    public void setActiveUser(User user) {
+        activeUser = user;
     }
 
-    public static User getActiveUser() {
+    public User getActiveUser() {
         return activeUser;
     }
 

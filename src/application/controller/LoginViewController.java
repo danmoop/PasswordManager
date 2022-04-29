@@ -23,7 +23,7 @@ public class LoginViewController {
     }
 
     public void openResetPassPage(ActionEvent event) {
-        SceneManager.openView("views/resetPassView.fxml", 460, 460);
+        SceneManager.switchToView(event, "views/resetPassView.fxml", 460, 460);
     }
 
     public void login(ActionEvent event) throws IOException {
@@ -34,7 +34,7 @@ public class LoginViewController {
         if (user == null || !user.getPassword().getPassword().equals(passField.getText())) {
             SceneManager.showAlert("Email / password are incorrect");
         } else {
-            DatabaseManager.setActiveUser(user);
+            databaseManager.setActiveUser(user);
             SceneManager.switchToView(event, "views/mainView.fxml", 900, 600);
         }
     }
