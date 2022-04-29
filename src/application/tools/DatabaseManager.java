@@ -15,14 +15,6 @@ public class DatabaseManager {
     private DatabaseManager(String path) throws IOException {
         DatabaseManager.path = path;
         this.users = new ArrayList<>();
-
-        File file = new File(path);
-
-        if (file.exists()) {
-            this.users = load();
-        } else {
-            save();
-        }
     }
 
     public static DatabaseManager getInstance() throws IOException {
@@ -35,6 +27,16 @@ public class DatabaseManager {
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public void init() throws IOException {
+        File file = new File(path);
+
+        if (file.exists()) {
+            this.users = load();
+        } else {
+            save();
+        }
     }
 
     private List<User> load() throws IOException {

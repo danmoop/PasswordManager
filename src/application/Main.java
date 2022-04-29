@@ -21,6 +21,7 @@ public class Main extends Application {
         User user = new User("dan@gmail.com", new Password("123", 125801251252L), "123", "123", new PasswordSettings(1, 2, 3, true, true));
 
         DatabaseManager databaseManager = DatabaseManager.getInstance();
+        databaseManager.init();
 
         //databaseManager.add(user);
 
