@@ -5,13 +5,11 @@ import java.io.Serializable;
 public class Website implements Serializable {
     private String username;
     private String websiteName;
-    private String email;
     private Password password;
 
-    public Website(String username, String websiteName, String email, Password password) {
+    public Website(String username, String websiteName, Password password) {
         this.username = username;
         this.websiteName = websiteName;
-        this.email = email;
         this.password = password;
     }
 
@@ -31,19 +29,20 @@ public class Website implements Serializable {
         this.websiteName = websiteName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public Password getPassword() {
         return password;
     }
 
     public void setPassword(Password password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "Website{" +
+                "username='" + username + '\'' +
+                ", websiteName='" + websiteName + '\'' +
+                ", password=" + password +
+                '}';
     }
 }
