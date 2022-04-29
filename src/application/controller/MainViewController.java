@@ -54,6 +54,7 @@ public class MainViewController implements Initializable {
             HBox hBox = new HBox();
             Text websiteName = new Text("Website: " + websites.get(i).getWebsiteName());
             Text username = new Text("Username: " + websites.get(i).getUsername());
+            Text email = new Text("Username: " + websites.get(i).getEmail());
             Text pass = new Text("Password: " + websites.get(i).getPassword().getPassword());
             Button deleteBtn = new Button("Delete");
             deleteBtn.setStyle("-fx-background-color: #5757e4; -fx-text-fill: white; -fx-font-weight: bold");
@@ -67,6 +68,7 @@ public class MainViewController implements Initializable {
 
             hBox.getChildren().add(websiteName);
             hBox.getChildren().add(username);
+            hBox.getChildren().add(email);
             hBox.getChildren().add(pass);
             hBox.getChildren().add(deleteBtn);
             hBox.setAlignment(Pos.CENTER);

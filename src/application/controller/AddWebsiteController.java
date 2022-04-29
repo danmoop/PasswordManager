@@ -22,6 +22,9 @@ public class AddWebsiteController {
     private TextField usernameField;
 
     @FXML
+    private TextField emailField;
+
+    @FXML
     private PasswordField passField;
 
     private long ONE_MONTH = 31L * 84600;
@@ -40,7 +43,7 @@ public class AddWebsiteController {
         long date = new Date().getTime();
 
         Password password = new Password(passField.getText(), date + ONE_MONTH * 3);
-        Website website = new Website(usernameField.getText(), websiteNameField.getText(), password);
+        Website website = new Website(usernameField.getText(), emailField.getText(), websiteNameField.getText(), password);
 
         user.getWebsites().add(website);
         databaseManager.set(user.getEmail(), user);
