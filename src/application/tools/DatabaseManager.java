@@ -68,15 +68,13 @@ public class DatabaseManager {
         File file = new File(path);
 
         if (file.exists()) {
-            this.users = load();
+            load();
         } else {
             save();
         }
     }
 
-    private List<User> load() throws IOException {
-        List<User> users = null;
-
+    private void load() throws IOException {
         try {
             FileInputStream fis = new FileInputStream(path);
             ObjectInputStream ois = new ObjectInputStream(fis);
@@ -84,8 +82,6 @@ public class DatabaseManager {
         } catch (FileNotFoundException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-        return users;
     }
 
     public void save() {
