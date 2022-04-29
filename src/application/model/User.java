@@ -1,8 +1,9 @@
 package application.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class User {
+public class User implements Serializable {
     private String email;
     private Password password;
     private List<Website> websites;
@@ -64,5 +65,17 @@ public class User {
 
     public void setPasswordSettings(PasswordSettings passwordSettings) {
         this.passwordSettings = passwordSettings;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password=" + password +
+                ", websites=" + websites +
+                ", securityQuestion='" + securityQuestion + '\'' +
+                ", securityAnswer='" + securityAnswer + '\'' +
+                ", passwordSettings=" + passwordSettings +
+                '}';
     }
 }

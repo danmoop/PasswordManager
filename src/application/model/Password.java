@@ -1,6 +1,8 @@
 package application.model;
 
-public class Password {
+import java.io.Serializable;
+
+public class Password implements Serializable {
     private String password;
     private long expirationDate;
 

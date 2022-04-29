@@ -1,6 +1,8 @@
 package application.model;
 
-public class PasswordSettings {
+import java.io.Serializable;
+
+public class PasswordSettings implements Serializable {
     private int minLength;
     private int maxLength;
     private int upperCharsNum;

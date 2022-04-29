@@ -1,6 +1,8 @@
 package application.model;
 
-public class Website {
+import java.io.Serializable;
+
+public class Website implements Serializable {
     private String username;
     private String websiteName;
     private String email;
