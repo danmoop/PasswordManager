@@ -43,7 +43,7 @@ public class SignUpViewController {
 
         if (databaseManager.findByEmail(email) == null) {
             long date = new Date().getTime();
-            User user = new User(email, new Password(pass, ONE_MONTH * 3), question, answer, null);
+            User user = new User(email, new Password(pass, date + ONE_MONTH * 3), question, answer, null);
             databaseManager.add(user);
 
             SceneManager.switchToView(event, "views/setPassSettings.fxml", 900, 600);
