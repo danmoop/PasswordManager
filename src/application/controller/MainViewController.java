@@ -4,6 +4,7 @@ import application.model.User;
 import application.model.Website;
 import application.tools.DatabaseManager;
 import application.tools.SceneManager;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,6 +15,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
@@ -47,6 +51,9 @@ public class MainViewController implements Initializable {
         checkForExpiredPasswords(user);
         List<Website> websites = user.getWebsites();
 
+        PassUtil passUtil = new PassUtil();
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
         VBox vBox = new VBox();
         vBox.setSpacing(15);
 
@@ -56,8 +63,11 @@ public class MainViewController implements Initializable {
             Text username = new Text("Username: " + websites.get(i).getUsername());
             Text email = new Text("Username: " + websites.get(i).getEmail());
             Text pass = new Text("Password: " + websites.get(i).getPassword().getPassword());
+            Button copyBtn = new Button("Copy");
             Button deleteBtn = new Button("Delete");
             deleteBtn.setStyle("-fx-background-color: #5757e4; -fx-text-fill: white; -fx-font-weight: bold");
+            copyBtn.setMinWidth(100);
+            deleteBtn.setMinWidth(100);
 
             int finalI = i;
             deleteBtn.setOnAction(event -> {
@@ -66,10 +76,17 @@ public class MainViewController implements Initializable {
                 SceneManager.switchToView(event, "views/mainView.fxml", 900, 600);
             });
 
+            copyBtn.setOnAction(event -> {
+                String decrypted = passUtil.decrypt(user.getWebsites().get(finalI).getPassword().getPassword());
+                StringSelection stringSelection = new StringSelection(decrypted);
+                clipboard.setContents(stringSelection, null);
+            });
+
             hBox.getChildren().add(websiteName);
             hBox.getChildren().add(username);
             hBox.getChildren().add(email);
             hBox.getChildren().add(pass);
+            hBox.getChildren().add(copyBtn);
             hBox.getChildren().add(deleteBtn);
             hBox.setAlignment(Pos.CENTER);
 

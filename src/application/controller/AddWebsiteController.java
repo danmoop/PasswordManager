@@ -5,6 +5,7 @@ import application.model.User;
 import application.model.Website;
 import application.tools.DatabaseManager;
 import application.tools.SceneManager;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -38,11 +39,12 @@ public class AddWebsiteController {
      */
     public void save(ActionEvent event) throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
+        PassUtil passUtil = new PassUtil();
 
         User user = databaseManager.getActiveUser();
         long date = new Date().getTime();
 
-        Password password = new Password(passField.getText(), date + ONE_MONTH * 3);
+        Password password = new Password(passUtil.encrypt(passField.getText()), date + ONE_MONTH * 3);
         Website website = new Website(usernameField.getText(), emailField.getText(), websiteNameField.getText(), password);
 
         user.getWebsites().add(website);
