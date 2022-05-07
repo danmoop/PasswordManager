@@ -44,11 +44,6 @@ public class SetPassSettingsController {
         int numOfUpperChars = Integer.parseInt(upperCharsNumField.getText());
         int numOfSpecialChars = Integer.parseInt(specialCharsNumField.getText());
 
-        System.out.println(minPassLength);
-        System.out.println(maxPassLength);
-        System.out.println(numOfSpecialChars);
-        System.out.println(numOfUpperChars);
-
         PasswordSettings passwordSettings = new PasswordSettings(minPassLength, maxPassLength, numOfUpperChars, numOfSpecialChars, useSpecChars.isSelected(), useUpperLetters.isSelected());
 
         DatabaseManager databaseManager = DatabaseManager.getInstance();
