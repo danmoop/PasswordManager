@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -23,17 +24,26 @@ import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class MainViewController implements Initializable {
 
     @FXML
     private ScrollPane scrollPane;
 
+    @FXML
+    private TextField searchField;
+
+    private DatabaseManager databaseManager;
+
     // An Initializable is implemented to perform an operation after the view has been loaded
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            displayWebsites();
+            databaseManager = DatabaseManager.getInstance();
+            User user = databaseManager.getActiveUser();
+            checkForExpiredPasswords(user);
+            displayWebsites(user.getWebsites());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -45,11 +55,8 @@ public class MainViewController implements Initializable {
      * Check for expired passwords and notify if there are any by showing an alert
      * Display each stored account in a vbox on a scroll pane
      */
-    private void displayWebsites() throws IOException {
-        DatabaseManager databaseManager = DatabaseManager.getInstance();
+    private void displayWebsites(List<Website> websites) throws IOException {
         User user = databaseManager.getActiveUser();
-        checkForExpiredPasswords(user);
-        List<Website> websites = user.getWebsites();
 
         PassUtil passUtil = new PassUtil();
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
@@ -57,12 +64,16 @@ public class MainViewController implements Initializable {
         VBox vBox = new VBox();
         vBox.setSpacing(15);
 
+
         for (int i = 0; i < websites.size(); i++) {
             HBox hBox = new HBox();
             Text websiteName = new Text("Website: " + websites.get(i).getWebsiteName());
             Text username = new Text("Username: " + websites.get(i).getUsername());
-            Text email = new Text("Username: " + websites.get(i).getEmail());
-            Text pass = new Text("Password: " + websites.get(i).getPassword().getPassword());
+            Text email = new Text("Email: " + websites.get(i).getEmail());
+
+            String userPass = websites.get(i).getPassword().getPassword();
+
+            Text pass = new Text("Password: " + userPass.substring(0, Math.min(15, userPass.length())) + "...");
             Button copyBtn = new Button("Copy");
             Button deleteBtn = new Button("Delete");
             deleteBtn.setStyle("-fx-background-color: #5757e4; -fx-text-fill: white; -fx-font-weight: bold");
@@ -73,11 +84,11 @@ public class MainViewController implements Initializable {
             deleteBtn.setOnAction(event -> {
                 user.getWebsites().remove(websites.get(finalI));
                 databaseManager.set(user.getEmail(), user);
-                SceneManager.switchToView(event, "views/mainView.fxml", 900, 600);
+                SceneManager.switchToView(event, "views/mainView.fxml", 1200, 700);
             });
 
             copyBtn.setOnAction(event -> {
-                String decrypted = passUtil.decrypt(user.getWebsites().get(finalI).getPassword().getPassword());
+                String decrypted = passUtil.decrypt(userPass);
                 StringSelection stringSelection = new StringSelection(decrypted);
                 clipboard.setContents(stringSelection, null);
             });
@@ -98,7 +109,40 @@ public class MainViewController implements Initializable {
     }
 
     /**
-     * This function sets the active authentication to null and redirects the user to login view
+     * This functions removes the results of the search and shows all user's projects
+     *
+     * @throws IOException
+     */
+    public void reset() throws IOException {
+        displayWebsites(databaseManager.getActiveUser().getWebsites());
+        searchField.setText("");
+    }
+
+    /**
+     * This function finds the websitse that match the given criteria
+     */
+    public void search() throws IOException {
+        scrollPane.setContent(null);
+        displayWebsites(find(searchField.getText()));
+        searchField.setText("");
+    }
+
+    /**
+     * THis function finds the websites that match the information given by the user
+     *
+     * @param value is the criteria that is going to be used to find websites
+     * @return the list of websites that match the criteria
+     */
+    private List<Website> find(String value) {
+        User user = databaseManager.getActiveUser();
+
+        return user.getWebsites().stream()
+                .filter(website -> website.getEmail().contains(value) || website.getWebsiteName().contains(value) || website.getUsername().contains(value))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * This function sets the active authentic  ation to null and redirects the user to login view
      *
      * @param event is used to identify which view should be replaced with a new one
      */

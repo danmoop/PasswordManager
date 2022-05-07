@@ -4,6 +4,7 @@ import application.model.Password;
 import application.model.User;
 import application.tools.DatabaseManager;
 import application.tools.SceneManager;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -48,10 +49,11 @@ public class SignUpViewController {
         String pass = passField.getText();
 
         DatabaseManager databaseManager = DatabaseManager.getInstance();
+        PassUtil passUtil = new PassUtil();
 
         if (databaseManager.findByEmail(email) == null) {
             long date = new Date().getTime();
-            User user = new User(email, new Password(pass, date + ONE_MONTH * 3), question, answer, null);
+            User user = new User(email, new Password(passUtil.encrypt(pass), date + ONE_MONTH * 3), question, answer, null);
             databaseManager.add(user);
 
             SceneManager.switchToView(event, "views/setPassSettings.fxml", 900, 600);

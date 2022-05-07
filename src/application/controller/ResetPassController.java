@@ -4,6 +4,7 @@ import application.model.Password;
 import application.model.User;
 import application.tools.DatabaseManager;
 import application.tools.SceneManager;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -57,12 +58,13 @@ public class ResetPassController {
     public void setPass(ActionEvent event) throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
         User user = databaseManager.findByEmail(emailField.getText());
+        PassUtil passUtil = new PassUtil();
 
         if (!user.getSecurityAnswer().equals(securityAnswerField.getText())) {
             SceneManager.showAlert("Incorrect answer");
         } else {
             long date = new Date().getTime();
-            user.setPassword(new Password(newPassField.getText(), date + ONE_MONTH * 3));
+            user.setPassword(new Password(passUtil.encrypt(newPassField.getText()), date + ONE_MONTH * 3));
             databaseManager.set(emailField.getText(), user);
 
             SceneManager.showAlert("Success!");

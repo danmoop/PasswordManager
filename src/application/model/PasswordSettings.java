@@ -6,15 +6,25 @@ public class PasswordSettings implements Serializable {
     private int minLength;
     private int maxLength;
     private int upperCharsNum;
+    private int specialCharsNum;
     private boolean useSpecialChars;
     private boolean useUpperChars;
 
-    public PasswordSettings(int minLength, int maxLength, int upperCharsNum, boolean useSpecialChars, boolean useUpperChars) {
+    public PasswordSettings(int minLength, int maxLength, int upperCharsNum, int specialCharsNum, boolean useSpecialChars, boolean useUpperChars) {
         this.minLength = minLength;
         this.maxLength = maxLength;
         this.upperCharsNum = upperCharsNum;
+        this.specialCharsNum = specialCharsNum;
         this.useSpecialChars = useSpecialChars;
         this.useUpperChars = useUpperChars;
+    }
+
+    public int getSpecialCharsNum() {
+        return specialCharsNum;
+    }
+
+    public void setSpecialCharsNum(int specialCharsNum) {
+        this.specialCharsNum = specialCharsNum;
     }
 
     public int getMinLength() {

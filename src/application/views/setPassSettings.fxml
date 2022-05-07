@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-      prefWidth="900.0" style="-fx-background-color: #F8FAFD;" xmlns="http://javafx.com/javafx/8.0.202"
+      prefWidth="900.0" style="-fx-background-color: #F8FAFD;" xmlns="http://javafx.com/javafx/8.0.241"
       xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controller.SetPassSettingsController">
     <children>
         <Text fill="#707070" layoutX="149.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0"
@@ -37,8 +37,14 @@
                           mnemonicParsing="false" text="Use Uppercase Letters" textAlignment="JUSTIFY"/>
                 <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="# of Special Letters"/>
+                        <TextField fx:id="specialCharsNumField" prefHeight="31.0" prefWidth="53.0" text="0"/>
+                    </children>
+                </HBox>
+                <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+                    <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="# of Uppercase Letters"/>
-                        <TextField fx:id="upperCharsNumField" prefHeight="31.0" prefWidth="53.0"/>
+                        <TextField fx:id="upperCharsNumField" prefHeight="31.0" prefWidth="53.0" text="0"/>
                     </children>
                 </HBox>
             </children>
@@ -46,6 +52,12 @@
         <Button fx:id="confirmSettingsBtn" layoutX="389.0" layoutY="512.0" mnemonicParsing="false"
                 onAction="#confirmSettings" prefHeight="42.0" prefWidth="122.0" style="-fx-background-color: #5757e4;"
                 text="Save" textFill="WHITE">
+            <font>
+                <Font name="System Bold" size="15.0"/>
+            </font>
+        </Button>
+        <Button layoutX="7.0" layoutY="43.0" mnemonicParsing="false" onAction="#goBack" prefHeight="0.0"
+                prefWidth="91.0" style="-fx-background-color: transparent;" text="Go Back" textFill="#5757e4">
             <font>
                 <Font name="System Bold" size="15.0"/>
             </font>

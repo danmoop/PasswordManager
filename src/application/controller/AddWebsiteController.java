@@ -4,11 +4,11 @@ import application.model.Password;
 import application.model.User;
 import application.model.Website;
 import application.tools.DatabaseManager;
+import application.tools.PasswordGenerationManager;
 import application.tools.SceneManager;
 import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
@@ -25,9 +25,6 @@ public class AddWebsiteController {
     @FXML
     private TextField emailField;
 
-    @FXML
-    private PasswordField passField;
-
     private long ONE_MONTH = 31L * 84600;
 
     /**
@@ -35,7 +32,6 @@ public class AddWebsiteController {
      * Then, the user is moved to a main view
      *
      * @param event is used to identify which view should be replaced with a new one
-     * @throws IOException
      */
     public void save(ActionEvent event) throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
@@ -44,12 +40,14 @@ public class AddWebsiteController {
         User user = databaseManager.getActiveUser();
         long date = new Date().getTime();
 
-        Password password = new Password(passUtil.encrypt(passField.getText()), date + ONE_MONTH * 3);
+        String pass = PasswordGenerationManager.generatePass(user.getPasswordSettings());
+
+        Password password = new Password(passUtil.encrypt(pass), date + ONE_MONTH * 3);
         Website website = new Website(usernameField.getText(), emailField.getText(), websiteNameField.getText(), password);
 
         user.getWebsites().add(website);
         databaseManager.set(user.getEmail(), user);
 
-        SceneManager.switchToView(event, "views/mainView.fxml", 900, 600);
+        SceneManager.switchToView(event, "views/mainView.fxml", 1200, 700);
     }
 }

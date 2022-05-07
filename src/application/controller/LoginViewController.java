@@ -3,6 +3,7 @@ package application.controller;
 import application.model.User;
 import application.tools.DatabaseManager;
 import application.tools.SceneManager;
+import edu.sjsu.yazdankhah.crypto.util.PassUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -37,14 +38,15 @@ public class LoginViewController {
      */
     public void login(ActionEvent event) throws IOException {
         DatabaseManager databaseManager = DatabaseManager.getInstance();
+        PassUtil passUtil = new PassUtil();
 
         User user = databaseManager.findByEmail(emailField.getText());
 
-        if (user == null || !user.getPassword().getPassword().equals(passField.getText())) {
+        if (user == null || !passUtil.decrypt(user.getPassword().getPassword()).equals(passField.getText())) {
             SceneManager.showAlert("Email / password are incorrect");
         } else {
             databaseManager.setActiveUser(user);
-            SceneManager.switchToView(event, "views/mainView.fxml", 900, 600);
+            SceneManager.switchToView(event, "views/mainView.fxml", 1200, 700);
         }
     }
 }

@@ -8,7 +8,7 @@ public class Website implements Serializable {
     private String email;
     private String websiteName;
     private Password password;
-    private long creationDate;
+    private final long creationDate;
 
     public Website(String username, String email, String websiteName, Password password) {
         this.username = username;

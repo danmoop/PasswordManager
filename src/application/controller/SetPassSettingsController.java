@@ -28,6 +28,9 @@ public class SetPassSettingsController {
     @FXML
     private TextField upperCharsNumField;
 
+    @FXML
+    private TextField specialCharsNumField;
+
     /**
      * This function finishes the registration by asking the settings for generating a password
      * After fetching the values, check whether they are correct and set the settings for the user
@@ -39,15 +42,21 @@ public class SetPassSettingsController {
         int minPassLength = Integer.parseInt(minPassLengthField.getText());
         int maxPassLength = Integer.parseInt(maxPassLengthField.getText());
         int numOfUpperChars = Integer.parseInt(upperCharsNumField.getText());
+        int numOfSpecialChars = Integer.parseInt(specialCharsNumField.getText());
 
-        PasswordSettings passwordSettings = new PasswordSettings(minPassLength, maxPassLength, numOfUpperChars, useSpecChars.isSelected(), useUpperLetters.isSelected());
+        System.out.println(minPassLength);
+        System.out.println(maxPassLength);
+        System.out.println(numOfSpecialChars);
+        System.out.println(numOfUpperChars);
+
+        PasswordSettings passwordSettings = new PasswordSettings(minPassLength, maxPassLength, numOfUpperChars, numOfSpecialChars, useSpecChars.isSelected(), useUpperLetters.isSelected());
 
         DatabaseManager databaseManager = DatabaseManager.getInstance();
         User user = databaseManager.getUsers().get(databaseManager.getUsers().size() - 1);
         user.setPasswordSettings(passwordSettings);
         databaseManager.set(user.getEmail(), user);
 
-        if (areSettingsCorrect(minPassLength, maxPassLength, numOfUpperChars)) {
+        if (areSettingsCorrect(minPassLength, maxPassLength, numOfUpperChars, numOfSpecialChars)) {
             SceneManager.switchToView(event, "views/loginView.fxml", 900, 600);
             SceneManager.showAlert("Registered successfully");
         } else {
@@ -56,10 +65,24 @@ public class SetPassSettingsController {
     }
 
     /**
+     * This function redirects the user to the signup screen
+     *
+     * @param event is used to identify which view should be replaced with a new one
+     */
+    public void goBack(ActionEvent event) throws IOException {
+        DatabaseManager databaseManager = DatabaseManager.getInstance();
+        User user = databaseManager.getUsers().get(databaseManager.getUsers().size() - 1);
+        databaseManager.getUsers().remove(user);
+        databaseManager.save();
+        SceneManager.switchToView(event, "views/signUpView.fxml", 900, 600);
+    }
+
+    /**
      * @return whether the values are correct and are in a valid range
      */
-    private boolean areSettingsCorrect(int minPassLength, int maxPassLength, int numOfUpperChars) {
-        if (minPassLength > maxPassLength) return false;
-        return numOfUpperChars <= maxPassLength && numOfUpperChars >= minPassLength;
+    private boolean areSettingsCorrect(int minPassLength, int maxPassLength, int numOfUpperChars, int numOfSpecialChars) {
+        if (minPassLength > maxPassLength || numOfSpecialChars > maxPassLength || numOfUpperChars > maxPassLength)
+            return false;
+        return numOfUpperChars >= 0 && numOfSpecialChars >= 0 && numOfSpecialChars + numOfUpperChars <= maxPassLength;
     }
 }
